@@ -167,8 +167,10 @@ ifeq ($(HAVE_GTEST),Yes)
 
 ifneq (android,$(OS))
 ifneq (ios,$(OS))
+ifneq (tvos,$(OS))
 ifneq (msvc-wp,$(OS))
 BUILD_UT_EXE=Yes
+endif
 endif
 endif
 endif
@@ -195,10 +197,12 @@ endif
 
 ifneq (android, $(OS))
 ifneq (ios, $(OS))
+ifneq (tvos, $(OS))
 ifneq (msvc-wp, $(OS))
 include $(SRC_PATH)codec/console/dec/targets.mk
 include $(SRC_PATH)codec/console/enc/targets.mk
 include $(SRC_PATH)codec/console/common/targets.mk
+endif
 endif
 endif
 endif
@@ -207,7 +211,9 @@ libraries: $(LIBPREFIX)$(PROJECT_NAME).$(LIBSUFFIX)
 
 # No point in building dylib for ios
 ifneq (ios, $(OS))
+ifneq (tvos, $(OS))
 libraries: $(LIBPREFIX)$(PROJECT_NAME).$(SHAREDLIBSUFFIX)
+endif
 endif
 
 LIBRARIES += $(LIBPREFIX)$(PROJECT_NAME).$(LIBSUFFIX) $(LIBPREFIX)$(PROJECT_NAME).$(SHAREDLIBSUFFIXVER)
